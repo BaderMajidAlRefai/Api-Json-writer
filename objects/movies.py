@@ -1,10 +1,8 @@
-import requests
-import os
+import requests, os
 
 from dotenv import load_dotenv
 from .category import Category
 from .normalized import Normalized
-from generate import generate_object
 
 class Movies(Category):
     def __init__(self):

@@ -1,69 +1,56 @@
-import requests
+import requests, os
+
+from dotenv import load_dotenv
 
 from .category import Category
+from .normalized import Normalized
 
 class Books(Category):
     def __init__(self):
-        super().__init__("Books", "Open Library")
+        super().__init__("Books", "Google Books")
         
     def api(self):
         responses = []
         failed_responses = []
 
+        load_dotenv()
+        api_key = os.getenv("GOOGLE_BOOKS_API_KEY")
         for query in self.list:
             response = requests.get(
-                f"https://openlibrary.org/works/{query}.json",
+                f"https://www.googleapis.com/books/v1/volumes/{query}",
+                params={
+                    "key" : api_key
+                }
             )
 
             if response.ok:
-                response = response.json()
-
-            else:
-                print(
-                    f"Failed to fetch {query}: "
-                    f"{response.status_code}"
-                    )
-                failed_responses.append(query)
-                continue
-
-            if response.get("authors"):
-                author_key = response["authors"][0]["author"]["key"]
-            else:
-                response["author_name"] = "unknown"
-                responses.append(response)
-                continue
-
-            author_response = requests.get(
-                f"https://openlibrary.org{author_key}.json"
-            )
-        
-
-            if author_response.ok:
-                response["author_name"] = author_response.json()["name"]
-                responses.append(response)
+                responses.append(response.json())
 
             else: 
                 print(
                     f"Failed to fetch {query}: "
-                    f"{author_response.status_code}"
+                    f"{response.status_code}"
+                    f"{response.text}"
                 )
                 failed_responses.append(query)
-
 
         return responses, failed_responses
 
     def normalize(self, responses):
         normalized_objects = []
-
         for response in responses:
-            game_object = Normalized(
-                id = response["steam_appid"],
-                title = response["name"],
-                creator = response["developers"][0],
-                yor = response["release_date"]["date"],
-                genres = [genre["description"] for genre in response["genres"]],
-                img = response["header_image"]
+            response["volumeInfo"]["imageLinks"]["thumbnail"] = response["volumeInfo"]["imageLinks"]["thumbnail"].replace(
+                "http://",
+                "https://"
             )
-            normalized_objects.append(game_object)
+            book_object = Normalized(
+                id = response["id"],
+                title = response["volumeInfo"]["title"],
+                creator = response["volumeInfo"]["authors"][0],
+                yor = response["volumeInfo"]["publishedDate"][:4],
+                genres = response["volumeInfo"]["categories"],
+                img = response["volumeInfo"]["imageLinks"]["thumbnail"]
+            )
+            normalized_objects.append(book_object)
 
         return normalized_objects
