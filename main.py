@@ -1,3 +1,5 @@
+import pathlib
+
 from helper_functions import (
     collect_category_items,
     confirm_failed_responses,
