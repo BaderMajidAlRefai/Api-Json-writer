@@ -1,10 +1,9 @@
-def generate_json(id, title, creator, yor, genres, rating, review):
+def generate_object(id, title, creator, yor, genres, img):
     return {
         "id" : id,
         "title" : title,
         "creator" : creator,
         "yor" : yor,
         "genres" : genres,
-        "rating" : rating,
-        "review" : review,
+        "img" : img
     }
