@@ -19,12 +19,21 @@ class Category():
             self.print_shopping_list()
             response = input("\nPlease insert item ID to add, BACK to remove last option or DONE to finish: ")
 
-            if response == "BACK":
+            if response == "":
+                print("Please enter something")
+                continue
+
+            elif response == "BACK":
                 if self.list:
                     self.list.pop()
                 continue
-            if response == "DONE":
-                break
+            
+            elif response == "DONE":
+                if self.list == []:
+                    print("Can't proceed with an empty list")
+                    continue
+                else:
+                    break
 
             self.list.append(response)
 
