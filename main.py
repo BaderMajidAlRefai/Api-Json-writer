@@ -74,4 +74,4 @@ for category, items in normalized.items():
     print(f"{category} results")
 
     for item in items:
-        print(f"-{item.id}: Title: {item.title}, Creator: {item.creator}, Year of Release: {item.yor}, Genres: {item.genres}, Image: {item.img}")
+        print(f"-{item.id}: Title: {item.title}, Creator: {item.creator}, Year of Release: {item.yor}, Genres: {item.genres}, Image: {item.img}\n")
