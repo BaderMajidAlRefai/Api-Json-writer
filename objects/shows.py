@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv
 from .category import Category
 from .normalized import Normalized
-from generate import generate_object
 
 class Shows(Category):
     def __init__(self):
