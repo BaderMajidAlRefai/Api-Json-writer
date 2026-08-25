@@ -2,12 +2,13 @@ import requests
 import os
 
 from dotenv import load_dotenv
-from category import Category
+from .category import Category
+from .normalized import Normalized
 from generate import generate_object
 
 class Movies(Category):
     def __init__(self):
-        super().__init__("Shows", "TMDB")
+        super().__init__("Movies", "TMDB")
 
     def api(self):
         load_dotenv()
@@ -36,17 +37,17 @@ class Movies(Category):
         return responses, failed_responses
 
     def normalize(self, responses):
-        category_dict = {}
+        normalized_objects = []
 
         for response in responses:
-            movie_dict = generate_object(
+            show_object = Normalized(
                 id = response["id"],
-                title = response["original_title"],
+                title = response["title"],
                 creator = response["production_companies"][0]["name"] if response["production_companies"] else "Unknown",
                 yor = response["release_date"][:4],
                 genres = [genre["name"] for genre in response["genres"]],
                 img = f"https://image.tmdb.org/t/p/w500{response['poster_path']}"
             )
-            category_dict[response["id"]] = movie_dict
+            normalized_objects.append(show_object)
 
-        return category_dict
+        return normalized_objects

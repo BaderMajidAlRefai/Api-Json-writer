@@ -1,4 +1,4 @@
-from category import Category
+from .category import Category
 
 class Books(Category):
     def __init__(self):
