@@ -53,8 +53,8 @@ class Anime(Category):
 
             else:
                 print(
-                    f"Failed to fetch {anime_id}:"
-                    f"{response.status_code}")
+                    f"\nFailed to fetch {anime_id}: "
+                    f"{response.status_code}\n")
                 
                 failed_responses.append(anime_id)
 

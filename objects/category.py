@@ -6,21 +6,30 @@ class Category():
         self.list = []
 
     def toggle_prompt(self):
-        self.toggle = input(f"\nWould you like to generate a {self.name} JSON file? \nYes: Any No: n ") != "n"
+        self.toggle = input(
+            f"\nWould you like to generate a {self.name} JSON file?\n"
+            "Yes: any | No: n\n> "
+        ) != "n"
 
     def print_shopping_list(self):
-        print(f"Current {self.name} shopping list:")
+        print(f"\nCurrent {self.name} shopping list:")
         for item in self.list:
-            print(f"\n-{item}")
+            print(f"- {item}")
 
     def shopping_list(self):
-        print(f"This category uses {self.api_provider}. Please browse there for your selections.")
+        print(
+            f"\nThis category uses {self.api_provider}. "
+            "Please browse there for your selections."
+        )
         while True:
             self.print_shopping_list()
-            response = input("\nPlease insert item ID to add, BACK to remove last option or DONE to finish: ")
+            response = input(
+                "\nEnter an item ID to add it.\n"
+                "Enter BACK to remove the last item or DONE to finish.\n> "
+            )
 
             if response == "":
-                print("Please enter something")
+                print("\nPlease enter something.")
                 continue
 
             elif response == "BACK":
@@ -30,13 +39,12 @@ class Category():
             
             elif response == "DONE":
                 if self.list == []:
-                    print("Can't proceed with an empty list")
+                    print("\nCan't proceed with an empty list.")
                     continue
                 else:
                     break
 
             self.list.append(response)
-
 
 
 

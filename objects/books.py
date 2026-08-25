@@ -28,9 +28,9 @@ class Books(Category):
 
             else: 
                 print(
-                    f"Failed to fetch {query}: "
-                    f"{response.status_code}"
-                    f"{response.text}"
+                    f"\nFailed to fetch {query}: "
+                    f"{response.status_code}\n"
+                    f"{response.text}\n"
                 )
                 failed_responses.append(query)
 

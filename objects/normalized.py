@@ -9,9 +9,16 @@ class Normalized():
         self.rating = 0
         self.review = ""
 
+    def __str__(self):
+         return f"""
+                {self.title}, {self.creator}, {self.yor}
+                {self.genres}
+                Rating: {self.rating}
+                Review: {self.review}
+                """
+
     def turn_to_object(self):
         return {
-            "category" : self.category,
             "id" : self.id,
             "title" : self.title,
             "creator" : self.creator,
@@ -21,3 +28,9 @@ class Normalized():
             "rating" : self.rating,
             "review" : self.review,
         }
+
+    def rate(self):
+        self.rating = int(input(f"\nRate {self.title} from 0 to 5:\n> "))
+
+    def write_review(self):
+            self.review = input(f"\nWrite your review for {self.title}:\n> ")

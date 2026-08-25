@@ -27,8 +27,8 @@ class Movies(Category):
 
             else: 
                 print(
-                    f"Failed to fetch {query}: "
-                    f"{response.status_code}"
+                    f"\nFailed to fetch {query}: "
+                    f"{response.status_code}\n"
                 )
                 failed_responses.append(query)
 
