@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pathlib
 
 from helper_functions import (
@@ -8,6 +9,7 @@ from helper_functions import (
     rate_entries,
     review_entries,
     select_categories,
+    write_json
 )
 
 from objects.movies import Movies
@@ -33,3 +35,5 @@ display_results(normalized)
 rate_entries(normalized)
 
 review_entries(normalized)
+
+write_json(normalized)
