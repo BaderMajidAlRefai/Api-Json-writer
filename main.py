@@ -18,22 +18,26 @@ from objects.books import Books
 from objects.games import Games
 from objects.shows import Shows
 
-movies, shows, anime, games, books = Movies(), Shows(), Anime(), Games(), Books()
+def main():
+    movies, shows, anime, games, books = Movies(), Shows(), Anime(), Games(), Books()
 
-categories = [movies, shows, anime, games, books]
+    categories = [movies, shows, anime, games, books]
 
-selected = select_categories(categories)
+    selected = select_categories(categories)
 
-collect_category_items(selected)
+    collect_category_items(selected)
 
-failures, normalized = fetch_and_normalize_categories(selected)
+    failures, normalized = fetch_and_normalize_categories(selected)
 
-confirm_failed_responses(failures)
+    confirm_failed_responses(failures)
 
-display_results(normalized)
+    display_results(normalized)
 
-rate_entries(normalized)
+    rate_entries(normalized)
 
-review_entries(normalized)
+    review_entries(normalized)
 
-write_json(normalized)
+    write_json(normalized)
+
+if __name__ == "__main__":
+    main()

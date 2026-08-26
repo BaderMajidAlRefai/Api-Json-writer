@@ -36,7 +36,11 @@ def select_item(normalized, purpose):
             print(f"{len(numbered_items)}: {item.title}")
 
     while True:
-        choice = int(input(f"\nWhat item would you like to {purpose}? "))
+        try:
+            choice = int(input(f"\nWhat item would you like to {purpose}? "))
+        except ValueError:
+            print("Please only insert numbers")
+            continue
         if choice < 1 or choice > len(numbered_items):
             print("\nInvalid entry. Please select a number from the list.")
 
