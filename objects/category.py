@@ -24,15 +24,11 @@ class Category():
         while True:
             self.print_shopping_list()
             response = input(
-                "\nEnter an item ID to add it.\n"
+                "\nEnter an item ID to add it. To bulk import seperate id by comma ','\n"
                 "Enter BACK to remove the last item or DONE to finish.\n> "
             )
 
-            if response == "":
-                print("\nPlease enter something.")
-                continue
-
-            elif response == "BACK":
+            if response == "BACK":
                 if self.list:
                     self.list.pop()
                 continue
@@ -43,6 +39,16 @@ class Category():
                     continue
                 else:
                     break
+
+            elif "," in response:
+                responses = response.split(",")
+                responses = [item.strip() for item in responses]
+                self.list.extend(responses)
+                continue
+
+            elif response == "":
+                print("\nPlease enter something.")
+                continue
 
             self.list.append(response)
 
