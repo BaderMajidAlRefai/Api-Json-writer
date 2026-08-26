@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 def expanded_list(normalized):
     print("\nHere are the following generated files:\n")
 
@@ -139,6 +142,28 @@ def review_entries(normalized):
         while True:
             selected_object = select_item(normalized, "review")
             selected_object.write_review()
-            response = input("\nAre you finished reviewing entries?\nYes: y | No: any\n> ").lower() == "y"
+            response = input("\nAre you finished reviewing entries? This is the final step before execution\nYes: y | No: any\n> ").lower() == "y"
             if response:
                 break
+
+def write_json(normalized):
+    working_directory = Path.cwd()
+    for category, items in normalized.items():
+        filename = f"{category.lower()}.json"
+        path = working_directory / filename
+
+        if path.exists():
+            with path.open("r") as file:
+                existing = json.load(file)
+
+        else:
+            existing = []
+
+        new_items = [item.turn_to_object() for item in items]
+
+        existing.extend(new_items)
+
+        with path.open("w") as file:
+            json.dump(existing, file, indent=4)
+
+    print("Files Successfully Completed")
