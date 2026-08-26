@@ -30,7 +30,17 @@ class Normalized():
         }
 
     def rate(self):
-        self.rating = int(input(f"\nRate {self.title} from 0 to 5:\n> "))
+        while True:
+            try:
+                response = int(input(f"\nRate {self.title} from 0 to 5:\n> "))
+            except ValueError:
+                 print("Please only insert numbers")
+                 continue
+            if response < 0 or response > 5:
+                 print("Please insert a valid rating.")
+            else:
+                 self.rating = response
+                 break
 
     def write_review(self):
             self.review = input(f"\nWrite your review for {self.title}:\n> ")
