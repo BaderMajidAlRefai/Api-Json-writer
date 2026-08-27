@@ -34,6 +34,7 @@ class Anime(Category):
                 genres
 
                 coverImage {
+                    extraLarge
                     large
                 }
             }
@@ -70,7 +71,7 @@ class Anime(Category):
                 creator = response["studios"]["nodes"][0]["name"] if response["studios"]["nodes"] else "Unknown",
                 yor = response["startDate"]["year"],
                 genres = response["genres"],
-                img = response["coverImage"]["large"]
+                img = response["coverImage"]["extraLarge"] or response["coverImage"]["large"]
             )
             normalized_objects.append(anime_object)
 
