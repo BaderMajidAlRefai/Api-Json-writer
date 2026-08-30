@@ -1,6 +1,7 @@
 # Subipi
 
 A small CLI tool for generating review JSON files for my personal website.
+<img width="1289" height="1196" alt="subipi" src="https://github.com/user-attachments/assets/59585323-3765-49d6-9701-d3e11242a702" />
 
 ## What it does
 
