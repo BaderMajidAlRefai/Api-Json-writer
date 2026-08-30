@@ -1,15 +1,12 @@
 class Category():
-    def __init__(self, name, api_provider, toggle = False):
+    def __init__(self, name, api_provider, selected = False):
         self.name = name
-        self.toggle = toggle
+        self.selected = selected
         self.api_provider = api_provider
         self.list = []
 
-    def toggle_prompt(self):
-        self.toggle = input(
-            f"\nWould you like to generate a {self.name} JSON file?\n"
-            "Yes: any | No: n\n> "
-        ) != "n"
+    def toggle(self):
+        self.selected = not self.selected
 
     def print_shopping_list(self):
         print(f"\nCurrent {self.name} shopping list:")

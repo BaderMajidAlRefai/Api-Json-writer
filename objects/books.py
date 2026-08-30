@@ -7,7 +7,7 @@ from .normalized import Normalized
 
 class Books(Category):
     def __init__(self):
-        super().__init__("Books", "Google Books")
+        super().__init__("books", "Google Books")
         
     def api(self):
         responses = []
@@ -45,6 +45,7 @@ class Books(Category):
             )
             book_object = Normalized(
                 id = response["id"],
+                category = self.name,
                 title = response["volumeInfo"]["title"],
                 creator = response["volumeInfo"]["authors"][0],
                 yor = response["volumeInfo"]["publishedDate"][:4],

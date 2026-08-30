@@ -5,7 +5,7 @@ from .normalized import Normalized
 
 class Games(Category):
     def __init__(self):
-        super().__init__("Games", "Steam")
+        super().__init__("games", "Steam")
 
     def api(self):
         responses = []
@@ -45,6 +45,7 @@ class Games(Category):
         for response in responses:
             game_object = Normalized(
                 id = response["steam_appid"],
+                category = self.name,
                 title = response["name"],
                 creator = response["developers"][0],
                 yor = response["release_date"]["date"],

@@ -1,6 +1,7 @@
 class Normalized():
-    def __init__(self, id, title, creator, yor, genres, img):
+    def __init__(self, id, category, title, creator, yor, genres, img):
         self.id = id
+        self.category = category
         self.title = title
         self.creator = creator
         self.yor = yor
@@ -20,6 +21,7 @@ class Normalized():
     def turn_to_object(self):
         return {
             "id" : self.id,
+            "category" : self.category,
             "title" : self.title,
             "creator" : self.creator,
             "yor" : self.yor,

@@ -6,7 +6,7 @@ from .normalized import Normalized
 
 class Movies(Category):
     def __init__(self):
-        super().__init__("Movies", "TMDB")
+        super().__init__("movies", "TMDB")
 
     def api(self):
         load_dotenv()
@@ -40,6 +40,7 @@ class Movies(Category):
         for response in responses:
             show_object = Normalized(
                 id = response["id"],
+                category = self.name,
                 title = response["title"],
                 creator = response["production_companies"][0]["name"] if response["production_companies"] else "Unknown",
                 yor = response["release_date"][:4],

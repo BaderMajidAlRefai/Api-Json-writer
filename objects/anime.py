@@ -5,7 +5,7 @@ from .normalized import Normalized
 
 class Anime(Category):
     def __init__(self):
-        super().__init__("Anime", "Anilist")
+        super().__init__("anime", "Anilist")
 
     def api(self):
         responses = []
@@ -67,6 +67,7 @@ class Anime(Category):
         for response in responses:
             anime_object = Normalized(
                 id = response["id"],
+                category = self.name,
                 title = response["title"]["english"] or response["title"]["romaji"],
                 creator = response["studios"]["nodes"][0]["name"] if response["studios"]["nodes"] else "Unknown",
                 yor = response["startDate"]["year"],
